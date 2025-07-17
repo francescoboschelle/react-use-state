@@ -2,13 +2,13 @@ import { useState } from "react";
 import data from "../data/data.jsx";
 
 export default function Main() {
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(null);
 
   function handleClick(i) {
     setPage(i);
   }
 
-  let currentData = data[page];
+  let currentData = data[page] || null;
 
   return (
     <>
@@ -34,8 +34,14 @@ export default function Main() {
               })}
             </div>
             <div className="page">
-              <h2>{currentData.name}</h2>
-              <p>{currentData.description}</p>
+              {currentData !== null ? (
+                <>
+                  <h2>{currentData.name}</h2>
+                  <p>{currentData.description}</p>
+                </>
+              ) : (
+                ""
+              )}
             </div>
           </div>
         </div>
